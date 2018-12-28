@@ -9,6 +9,10 @@ LiSA.queue(10)
 
 LiSA.assignBatch(n=>{
     return new Promise((r,j)=>{
+        // if(n==50){
+        //     j('some thing error')
+        //     return
+        // }
         setTimeout(()=>{
             console.log('i am ' + n)
             r(n*10)

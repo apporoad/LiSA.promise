@@ -1,15 +1,5 @@
-# LiSA.Promise
-mad promsie swapper
+const LiSAP = require('./')
 
-## just try it
-
-### install 
-```bash
-npm install --save lisa.promise
-```
-easy use
-```js
-const LiSAP = require('lisa.promise')
 //your action
 var yourAction = name =>{
     console.log("hello  i am " + name )
@@ -34,27 +24,10 @@ LiSAP.action('default picar').then(names =>{
     console.log(names)
 })
 
-/* result:
-hello  i am LiSA
-hello  i am default picar
-hello  i am aoer
-hello  i am luna
-hello  i am apporoad
-hello  i am rue
-hello  i am aphyse
-[ 'LiSA',
-  'default picar',
-  'aoer',
-  'luna',
-  'apporoad',
-  'rue',
-  'aphyse' ]
 
-*/
 
-```
-chain invoke 
-```js
+// chain
+
 LiSAP
     .assignBatch(name=>{ console.log("hello  i am " + name ) ; return name},['LiSA','aoer'])
     .assignBatch(name=>{ console.log("hi i am " + name ) ; return name},['luna','apporoad'])
@@ -67,16 +40,3 @@ LiSAP
     .catch(err =>{
         console.log(err)
     })
-/*
-
-hello  i am LiSA
-hello  i am aoer
-hi i am luna
-hi i am apporoad
-hi i am promise luna
-hi i am promise apporoad
- my name is xxxxxx
-[ 'LiSA', 'aoer', 'luna', 'apporoad', 'luna', 'apporoad', 'xxxxxx' ]
-*/
-```
-more demo in testMad.js
