@@ -1,0 +1,28 @@
+{
+  "name": "batpromise",
+  "version": "1.0.0",
+  "description": "run promise batch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apporoad/batPromise.git"
+  },
+  "keywords": [
+    "promise",
+    "batch",
+    "serial",
+    "serial"
+  ],
+  "author": "apporoad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apporoad/batPromise/issues"
+  },
+  "homepage": "https://github.com/apporoad/batPromise#readme",
+  "dependencies": {
+    "promise-sequential": "^1.1.1"
+  }
+}
