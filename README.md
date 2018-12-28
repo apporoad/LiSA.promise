@@ -23,9 +23,9 @@ var yourAction = name =>{
     })
 }
 // here to set serial or parallel or mutli-line
-LiSA.queue(2)
-LiSA.parallel()
-LiSA.serial(2)
+LiSAP.queue(2)
+LiSAP.parallel()
+LiSAP.serial(2)
 
 // your params
 var names = ["LiSA" , null,"aoer" , "luna", "apporoad","rue","aphyse"]
