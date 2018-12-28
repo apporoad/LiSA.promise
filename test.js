@@ -1,6 +1,8 @@
 var LiSA = require('./')
 
 LiSA.queue(2)
+LiSA.parallel()
+LiSA.serial(2)
 
 LiSA.assignBatch(n=>{
     console.log('i am ' + n)
