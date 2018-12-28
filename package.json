@@ -1,27 +1,24 @@
 {
-  "name": "batpromise",
+  "name": "lisa.promise",
   "version": "1.0.0",
-  "description": "run promise batch",
+  "description": "run tasks as LiSA's commander",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apporoad/batPromise.git"
+    "url": "git+https://github.com/apporoad/LiSA.promise.git"
   },
   "keywords": [
-    "promise",
-    "batch",
-    "serial",
-    "serial"
+    "task"
   ],
   "author": "apporoad",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/apporoad/batPromise/issues"
+    "url": "https://github.com/apporoad/LiSA.promise/issues"
   },
-  "homepage": "https://github.com/apporoad/batPromise#readme",
+  "homepage": "https://github.com/apporoad/LiSA.promise#readme",
   "dependencies": {
     "promise-sequential": "^1.1.1"
   }
