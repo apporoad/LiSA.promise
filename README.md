@@ -1,5 +1,5 @@
 # LiSA.Promise
-mad promsie swapper
+mad promsie wrapper
 
 ## just try it
 
