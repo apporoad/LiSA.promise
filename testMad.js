@@ -1,4 +1,4 @@
-var LiSA = require('./')
+var LiSA = require('./')()
 
 var paramArray = new Array()
 for(var i =0 ;i<101;i++){

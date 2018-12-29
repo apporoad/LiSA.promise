@@ -1,4 +1,4 @@
-var LiSA = require('./')
+var LiSA = require('./')()
 
 LiSA.queue(2)
 LiSA.parallel()
@@ -12,3 +12,16 @@ LiSA.assignBatch(n=>{
 }).catch(rs=>{
     console.log(rs)
 })
+
+
+
+var LiSA1 = require('./')(1)
+
+var LiSA2 = require('./')(2)
+
+
+LiSA1.assignBatch(d=>{console.log('hello i LiSA1 ' +d )},['1','2','3'])
+
+LiSA2.assignBatch(d=>{console.log('hello i LiSA2 ' +d )},['1','2','3'])
+
+LiSA2.action().then()

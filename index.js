@@ -69,9 +69,9 @@ const all = require('promise-sequential')
 //     console.log(results)
 // })
 
-function LiSA(){
-    _this =this
-    this._queue = 0
+function LiSA(qcount){
+    var _this =this
+    this._queue =qcount || 0
     this._todoList= new Array()
 
     this.queue = count =>{
@@ -155,4 +155,10 @@ function LiSA(){
     }
 }
 
-module.exports = new LiSA()
+module.exports =(queue)=>{
+    return new LiSA(queue)
+}
+
+// exports.promise = ()=>{
+//     return new LiSA()
+// }

@@ -9,7 +9,7 @@ npm install --save lisa.promise
 ```
 easy use
 ```js
-const LiSAP = require('lisa.promise')
+const LiSAP = require('lisa.promise')(2)
 //your action
 var yourAction = name =>{
     console.log("hello  i am " + name )
