@@ -1,3 +1,4 @@
+<div align=center><img src="https://raw.githubusercontent.com/apporoad/LiSA.promise/master/LiSA.promise.png"/></div>
 # LiSA.Promise
 mad promsie wrapper
 
