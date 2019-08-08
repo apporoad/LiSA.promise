@@ -69,6 +69,12 @@ const all = require('promise-sequential')
 //     console.log(results)
 // })
 
+// group
+function Group(){
+
+
+}
+
 function LiSA(qcount){
     var _this =this
     this._queue =qcount || 0
@@ -106,6 +112,15 @@ function LiSA(qcount){
             param : param
         })
         return _this
+    }
+
+    this.autoAction = (defaultParam,options) =>{
+        options = options || {}
+        options.then = options.then || (() => { })
+        options.catch = options.catch || (()=>{})
+        options.internal = options.internal || 100
+        
+
     }
 
     this.action = defaultParam =>{
