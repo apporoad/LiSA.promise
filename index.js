@@ -71,6 +71,8 @@ const all = require('promise-sequential')
 
 // group
 function Group(){
+    var _this = this
+    var _map = {}
 
 
 }
@@ -114,16 +116,7 @@ function LiSA(qcount){
         return _this
     }
 
-    this.autoAction = (defaultParam,options) =>{
-        options = options || {}
-        options.then = options.then || (() => { })
-        options.catch = options.catch || (()=>{})
-        options.internal = options.internal || 100
-        
-
-    }
-
-    this.action = defaultParam =>{
+    var _atcion = defaultParam =>{
         if(_this._todoList.length == 0) return new Promise((r,j)=>{r()})
         var todoList = []
         Object.assign(todoList,_this._todoList)
@@ -168,6 +161,70 @@ function LiSA(qcount){
             return new Promise(r=>{ r(fArray)})
         })
     }
+    this.action = defaultParam =>{
+        if(_autoOptions.on){
+            console.log("LiSA.promis : autoAction on , do nothing here")
+            return
+        }
+        return _atcion(defaultParam)
+    }
+
+    var _autoOptions = {
+        on : false,
+        then : (()=>{}),
+        catch : (()=>{}),
+        internal : 100,
+        defaultParam: null
+    }
+    var _auto = ()=>{
+        var lock = false
+        var ti = setInterval(() => {
+            if(_autoOptions.on){
+                if(!lock){
+                    lock = true
+                    _atcion(_autoOptions.defaultParam).then(windowMina=>{
+                        if(_autoOptions.then){
+                            var r =  _autoOptions.then(windowMina)
+                            if(r.then){
+                                r.then(()=>{ 
+                                    lock = false
+                                })
+                            }
+                            else
+                            {
+                                lock = false
+                            }
+                        }
+                        else
+                        {
+                            lock =false
+                        }
+                    }).catch(_atcion.catch)
+                }
+               
+            }
+            else{
+                clearInterval(ti)
+            }
+        }, _autoOptions.internal)
+    }
+    this.autoAction = (defaultParam,options) =>{
+        if(options){
+            _autoOptions.then = options.then || _autoOptions.then
+            _autoOptions.catch = options.catch || _autoOptions.catch
+            _autoOptions.internal = options.internal || _autoOptions.internal
+        }
+        _autoOptions.defaultParam = defaultParam
+        if(_autoOptions.on ==false){
+            _autoOptions.on = true
+            _auto()
+        }
+    }
+    this.stopAuto = ()=>{
+        _autoOptions.on = false
+    }
+    
+
 }
 
 module.exports =(queue)=>{
