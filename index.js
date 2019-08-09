@@ -181,11 +181,15 @@ function LiSA(qcount){
         var ti = setInterval(() => {
             if(_autoOptions.on){
                 if(!lock){
+                    // no tasks
+                    if(_this._todoList.length == 0){
+                        return
+                    }
                     lock = true
                     _atcion(_autoOptions.defaultParam).then(windowMina=>{
                         if(_autoOptions.then){
                             var r =  _autoOptions.then(windowMina)
-                            if(r.then){
+                            if(r && r.then){
                                 r.then(()=>{ 
                                     lock = false
                                 })
