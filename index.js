@@ -1,13 +1,5 @@
 const all = require('promise-sequential')
 
-// var promiseAllArray =  (arr,fn)=>{
-//     var pArray = new Array()
-//     arr.forEach(element => {
-//         pArray.push( new Promise((r,j)=>{  r(fn(element)) }))
-//     });
-//     return Promise.all(pArray)
-//  }
-
  var parallelRun = (assignArr,defaultParam)=>{
      var pArray = new Array()
      assignArr.forEach(element=>{
@@ -16,13 +8,6 @@ const all = require('promise-sequential')
      return Promise.all(pArray)
  }
 
-//  var promiseAllArraySerial =  (arr,fn)=>{
-//     var pArray = new Array()
-//     arr.forEach(element => {
-//         pArray.push(()=>{ return new Promise((r,j)=>{  r(fn(element)) })})
-//     })
-//     return all(pArray)
-//  }
 
  var serialRun = (assignArr,defaultParam)=>{
     var pArray = new Array()
@@ -31,51 +16,6 @@ const all = require('promise-sequential')
     })
     return all(pArray)
  }
-
-
-//  promiseAllArray([5,4,3,2,1],function(d){
-//     //  return new Promise((r,j)=>{
-       
-//     //     setTimeout(() => {
-//     //         console.log("hello " + d)
-//     //         r(d*10)
-//     //     }, d*100);
-//     //  })
-//     console.log("hello " + d)
-//     return d*10
-
-//  }).then(results=>{
-//     console.log(results)
-// })
-
-
-// promiseAllArraySerial([5,4,3,2,1],function(d){
-//     return new Promise((r,j)=>{
-      
-//        setTimeout(() => {
-//            console.log("hello " + d)
-//            r(d*10)
-//        }, d*100);
-//     })
-// }).then(results=>{
-//     console.log(results)
-// })
-
-
-// promiseAllArraySerial([5,4,3,2,1],function(d){
-//     console.log("hello " + d)
-//     return d* 10
-// }).then(results=>{
-//     console.log(results)
-// })
-
-// group
-function Group(){
-    var _this = this
-    var _map = {}
-
-
-}
 
 function LiSA(qcount){
     var _this =this
@@ -105,6 +45,7 @@ function LiSA(qcount){
                 param : p
             })
         })
+        _triggerAuto()
         return _this
     }
     
@@ -113,6 +54,7 @@ function LiSA(qcount){
             action : action,
             param : param
         })
+        _triggerAuto()
         return _this
     }
 
@@ -174,15 +116,28 @@ function LiSA(qcount){
         then : (()=>{}),
         catch : (()=>{}),
         internal : 100,
-        defaultParam: null
+        defaultParam: null,
+        running : false
+    }
+    var _triggerAuto =()=>{
+        if(_autoOptions.on){
+            if(_autoOptions.running ==false){
+                _auto()
+            }
+        }
     }
     var _auto = ()=>{
         var lock = false
         var ti = setInterval(() => {
             if(_autoOptions.on){
+                _autoOptions.running =true
                 if(!lock){
                     // no tasks
                     if(_this._todoList.length == 0){
+                        //没有任务，自动停止执行
+                        clearInterval(ti)
+                        //再次触发时起效果
+                        _autoOptions.running =false
                         return
                     }
                     lock = true
@@ -209,6 +164,7 @@ function LiSA(qcount){
             }
             else{
                 clearInterval(ti)
+                _autoOptions.running =false
             }
         }, _autoOptions.internal)
     }
@@ -216,12 +172,13 @@ function LiSA(qcount){
         if(options){
             _autoOptions.then = options.then || _autoOptions.then
             _autoOptions.catch = options.catch || _autoOptions.catch
-            _autoOptions.internal = options.internal || _autoOptions.internal
+            _autoOptions.internal = options.internal  || options.interval || _autoOptions.internal 
         }
         _autoOptions.defaultParam = defaultParam
         if(_autoOptions.on ==false){
             _autoOptions.on = true
-            _auto()
+            _triggerAuto()
+            //_auto()
         }
     }
     this.stopAuto = ()=>{
@@ -234,7 +191,3 @@ function LiSA(qcount){
 module.exports =(queue)=>{
     return new LiSA(queue)
 }
-
-// exports.promise = ()=>{
-//     return new LiSA()
-// }

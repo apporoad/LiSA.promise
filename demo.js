@@ -1,4 +1,4 @@
-const LiSAP = require('./')
+const LiSAP = require('./')()
 
 //your action
 var yourAction = name =>{
